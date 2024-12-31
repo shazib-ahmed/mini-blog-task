@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html # This mounts the entire project directory to the container
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: mini_blog
+      DB_USER: root
+      DB_PASS: secret
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: mini_blog
